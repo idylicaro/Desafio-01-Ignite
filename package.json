@@ -1,15 +1,15 @@
 {
-  "name": "node-ts-template",
+  "name": "desafio-01-ignite",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "repository": "https://github.com/idylicaro/node-ts-template",
+  "repository": "https://github.com/idylicaro/desafio-01-ignite",
   "author": "Idyl Ícaro dos Santos <idylicaro.se@gmail.com>",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "npm run clean && tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/server.js",
     "start:dev": "npx nodemon"
   },
   "devDependencies": {
