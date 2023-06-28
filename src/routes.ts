@@ -16,7 +16,16 @@ export const routes: Route[] = [
     path: buildRoutePath('/tasks'),
     method: 'GET',
     handler: async (req: any, res: any): Promise<void> => {
-      const tasks: Task[] = database.select('tasks');
+      const { search } = req.query;
+      const tasks: Task[] = database.select(
+        'tasks',
+        search
+          ? {
+              title: search,
+              description: search
+            }
+          : null
+      );
       res.end(JSON.stringify(tasks));
     }
   },

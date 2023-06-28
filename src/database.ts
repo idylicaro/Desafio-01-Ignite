@@ -25,8 +25,16 @@ export class Database {
     await fs.writeFile(DATABASEPATH, JSON.stringify(this.#database));
   };
 
-  select(table: string): any[] {
-    const data = this.#database[table] ?? [];
+  select(table: string, search: any): any[] {
+    let data = this.#database[table] ?? [];
+
+    if (search) {
+      data = data.filter((row: any) => {
+        return Object.entries(search).some(([key, value]: [string, string]) => {
+          return row[key].toLowerCase().includes(value.toLowerCase());
+        });
+      });
+    }
     return data;
   }
 
