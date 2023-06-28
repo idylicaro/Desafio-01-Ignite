@@ -1,9 +1,11 @@
 import http from 'node:http';
 import { routes, Route } from './routes.js';
 import { json } from './middlewares/json.js';
+import { extractQueryParams } from './utils/extract-query-params.js';
 
 interface CustomIncomingMessage extends http.IncomingMessage {
   params?: { [key: string]: string };
+  query?: { [key: string]: string };
 }
 
 const server = http.createServer(
@@ -18,6 +20,8 @@ const server = http.createServer(
 
     if (route) {
       const routeParams = req.url.match(route.path);
+      const { query, ...params } = routeParams.groups;
+      req.query = query ? extractQueryParams(query) : {};
       req.params = { ...routeParams?.groups };
       return route.handler(req, res);
     }
