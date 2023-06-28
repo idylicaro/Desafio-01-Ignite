@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { CreateTaskDTO, UpdateTaskDTO } from './models/tasks/index.js';
+import { ErrorTaskNotFound } from './helpers.js';
 
 interface DatabaseTable {
   [key: string]: any[];
@@ -55,11 +56,12 @@ export class Database {
       (row: any) => row.id === id
     );
     if (rowIndex > -1) {
-      console.log(Object.entries(data));
       Object.entries(data).forEach(([key, value]: [string, string]) => {
         if (value !== undefined) this.#database[table][rowIndex][key] = value;
       });
       this.#persist();
+    } else {
+      throw ErrorTaskNotFound;
     }
   }
 
@@ -70,6 +72,21 @@ export class Database {
     if (rowIndex > -1) {
       this.#database[table].splice(rowIndex, 1);
       this.#persist();
+    } else {
+      throw ErrorTaskNotFound;
+    }
+  }
+
+  updateTaskState(table: string, id: string): void {
+    const rowIndex = this.#database[table].findIndex(
+      (row: any) => row.id === id
+    );
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex].is_done =
+        !this.#database[table][rowIndex].is_done;
+      this.#persist();
+    } else {
+      throw ErrorTaskNotFound;
     }
   }
 }

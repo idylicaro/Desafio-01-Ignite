@@ -2,6 +2,7 @@ export interface Task {
   id: string;
   title: string;
   description: string;
+  is_done: boolean;
 }
 
 export interface CreateTaskDTO {
