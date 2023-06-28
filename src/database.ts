@@ -56,6 +56,7 @@ export class Database {
       (row: any) => row.id === id
     );
     if (rowIndex > -1) {
+      this.#database[table][rowIndex].updated_at = new Date();
       Object.entries(data).forEach(([key, value]: [string, string]) => {
         if (value !== undefined) this.#database[table][rowIndex][key] = value;
       });
@@ -82,6 +83,10 @@ export class Database {
       (row: any) => row.id === id
     );
     if (rowIndex > -1) {
+      if (this.#database[table][rowIndex].is_done) {
+        this.#database[table][rowIndex].completed_at = null;
+      } else this.#database[table][rowIndex].completed_at = new Date();
+
       this.#database[table][rowIndex].is_done =
         !this.#database[table][rowIndex].is_done;
       this.#persist();

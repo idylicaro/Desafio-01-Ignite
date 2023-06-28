@@ -40,7 +40,10 @@ export const routes: Route[] = [
         id: randomUUID(),
         title,
         description,
-        is_done: false
+        is_done: false,
+        created_at: new Date(),
+        updated_at: new Date(),
+        completed_at: null
       };
 
       database.insert('tasks', task);
