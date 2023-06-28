@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { CreateTaskDTO, UpdateTaskDTO } from './models/tasks/index.js';
 
 interface DatabaseTable {
   [key: string]: any[];
@@ -38,7 +39,7 @@ export class Database {
     return data;
   }
 
-  insert(table: string, data: any): any {
+  insert(table: string, data: CreateTaskDTO): any {
     if (Array.isArray(this.#database[table])) {
       this.#database[table].push(data);
     } else {
@@ -49,15 +50,15 @@ export class Database {
     return data;
   }
 
-  update(table: string, id: string, data: any): void {
+  update(table: string, id: string, data: UpdateTaskDTO): void {
     const rowIndex = this.#database[table].findIndex(
       (row: any) => row.id === id
     );
     if (rowIndex > -1) {
-      this.#database[table][rowIndex] = {
-        ...this.#database[table][rowIndex],
-        ...data
-      };
+      console.log(Object.entries(data));
+      Object.entries(data).forEach(([key, value]: [string, string]) => {
+        if (value !== undefined) this.#database[table][rowIndex][key] = value;
+      });
       this.#persist();
     }
   }
