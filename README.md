@@ -3,14 +3,16 @@
 ## Objetivos:
 
 - [x] Criação de uma task.
-  - [ ] Adicionar os campos de tempo `created_at`, `updated_at` e `completed_at`.
+  - [x] Adicionar e atualizar o `created_at`.
 - [x] Listagem de todas as tasks.
 - [x] Atualização de uma task pelo `id`.
-  - [ ] Validar se existe a task com o `id`.
+  - [x] Validar se existe a task com o `id`.
+  - [x] Adicionar e atualizar o `updated_at`.
 - [x] Remover uma task pelo `id`.
-  - [ ] Validar se existe a task com o `id`.
-- [ ] Marcar pelo `id` uma task como completa.
-- [ ] Validação dos DTOs.
+  - [x] Validar se existe a task com o `id`.
+- [x] Marcar pelo `id` uma task como completa.
+  - [x] Validar se existe a task com o `id`.
+  - [x] Adicionar e atualizar o `completed_at`.
 - [ ] **PLUS**: Criar script para gerar csv com quantidade X de tasks.
 - [ ] **PLUS**: Importação de tasks em massa por um arquivo CSV.
 
