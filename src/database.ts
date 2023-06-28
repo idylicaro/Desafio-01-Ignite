@@ -41,6 +41,19 @@ export class Database {
     return data;
   }
 
+  update(table: string, id: string, data: any): void {
+    const rowIndex = this.#database[table].findIndex(
+      (row: any) => row.id === id
+    );
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex] = {
+        ...this.#database[table][rowIndex],
+        ...data
+      };
+      this.#persist();
+    }
+  }
+
   delete(table: string, id: string): void {
     const rowIndex = this.#database[table].findIndex(
       (row: any) => row.id === id
