@@ -13,8 +13,8 @@
 - [x] Marcar pelo `id` uma task como completa.
   - [x] Validar se existe a task com o `id`.
   - [x] Adicionar e atualizar o `completed_at`.
-- [ ] **PLUS**: Criar script para gerar csv com quantidade X de tasks.
-- [ ] **PLUS**: Importação de tasks em massa por um arquivo CSV.
+- [x] **PLUS**: Criar script para gerar csv com quantidade X de tasks.
+- [x] **PLUS**: Importação de tasks em massa por um arquivo CSV.
 
 ### Rotas e regras de negócio
 
